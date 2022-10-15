@@ -10,24 +10,13 @@ public class Physical2DMover : MonoBehaviour, ICanMove2D
         rb = GetComponent<Rigidbody>();
     }
 
-    public void MoveBackward(float value)
-    {
-        Move(Vector3.back * value);
-    }
-
-    public void MoveForward(float value)
-    {
-        Move(Vector3.forward * value);
-    }
-
-    public void MoveLeft(float value)
-    {
-        Move(Vector3.left * value);
-    }
-
-    public void MoveRight(float value)
+    public void MoveHorizontal(float value)
     {
         Move(Vector3.right * value);
+    }
+    public void MoveDepth(float value)
+    {
+        Move(Vector3.forward * value);
     }
 
     void Move(Vector3 moveVector)
@@ -39,4 +28,6 @@ public class Physical2DMover : MonoBehaviour, ICanMove2D
         Vector3 newDirection = Vector3.RotateTowards(transform.forward, moveVector, turnSpeed *Time.deltaTime, 0.0f);
         transform.rotation = Quaternion.LookRotation(newDirection);
     }
+
+
 }

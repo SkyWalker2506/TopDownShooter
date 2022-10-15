@@ -84,6 +84,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   movementSpeed: 5
   scriptableMovementInput: {fileID: 11400000, guid: 721c3ec68601f05409919271d54c3361, type: 2}
-  shotAction: {fileID: 11400000, guid: 7b5169e2ea33bbe4194f77a2557cc30e, type: 2}
-  shotStoppedAction: {fileID: 11400000, guid: 2399345e0d404704c9a9643cf0fc906c, type: 2}
-  swapAction: {fileID: 11400000, guid: ea2ffecc2568af143ae85f594e1f11b4, type: 2}
+  scriptableWeaponEvent: {fileID: 11400000, guid: 1c15d787e63bafa4cb07cebfeb5ea960, type: 2}

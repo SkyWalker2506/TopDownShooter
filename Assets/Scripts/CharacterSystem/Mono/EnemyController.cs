@@ -2,7 +2,7 @@
 
 public class EnemyController : CharacterController
 {
-    [SerializeField] ScriptableMovementInput scriptableMovementInput;
+    IEnemyAI enemyAI;
     [SerializeField] ScriptableEvent shotAction;
     [SerializeField] ScriptableEvent shotStoppedAction;
     [SerializeField] ScriptableEvent swapAction;
@@ -10,17 +10,14 @@ public class EnemyController : CharacterController
     protected override void Awake()
     {
         base.Awake();
-        scriptableMovementInput.OnMoveLeftInput = new EventBase();
-        scriptableMovementInput.OnMoveRightInput = new EventBase();
-        scriptableMovementInput.OnMoveBackwardInput = new EventBase();
-        scriptableMovementInput.OnMoveForwardInput = new EventBase();
-        iHaveCharacterMovementInput = scriptableMovementInput;
+        enemyAI = GetComponent<IEnemyAI>();
+
     }
 
     protected override void OnEnable()
     {
         base.OnEnable();
-        shotAction.Event = iHaveMultipleWeapon.Attack;
+        enemyAI.AttackAction.Event = iHaveMultipleWeapon.Attack;
         shotStoppedAction.Event = iHaveMultipleWeapon.StopAttack;
         swapAction.Event = iHaveMultipleWeapon.Swap;
     }
@@ -38,4 +35,15 @@ public class EnemyController : CharacterController
         Debug.Log("Player Dead");
         gameObject.SetActive(false);
     }
+
+    protected override void SetCharacterMovementInput()
+    {
+        iHaveCharacterMovementInput = enemyAI;
+    }
+
+    protected override void SetWeaponInput()
+    {
+        iHaveWeaponInput = enemyAI;
+    }
 }
+

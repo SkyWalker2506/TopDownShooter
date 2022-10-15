@@ -7,35 +7,40 @@ public abstract class CharacterController : MonoBehaviour
 {
     [SerializeField] float movementSpeed=50;
     protected IHaveCharacterMovementInput iHaveCharacterMovementInput;
+    protected IHaveWeaponInput iHaveWeaponInput;
     ICanMove2D iCanMove;
     protected IDamagableThatHaveHealth iDamagableThatHaveHealth;
     protected IHaveWeapon iHaveWeapon;
-
 
     protected virtual void Awake()
     {
         iCanMove = GetComponent<ICanMove2D>();
         iHaveWeapon = GetComponent<IHaveWeapon>();
         iDamagableThatHaveHealth = GetComponent<IDamagableThatHaveHealth>();
+        SetCharacterMovementInput();
+        SetWeaponInput();
     }
 
     protected virtual void OnEnable()
     {
-        iHaveCharacterMovementInput.OnMoveLeftInput.Event = () => iCanMove.MoveLeft(movementSpeed);
-        iHaveCharacterMovementInput.OnMoveRightInput.Event = () => iCanMove.MoveRight(movementSpeed);
-        iHaveCharacterMovementInput.OnMoveBackwardInput.Event = () => iCanMove.MoveBackward(movementSpeed);
-        iHaveCharacterMovementInput.OnMoveForwardInput.Event = () => iCanMove.MoveForward(movementSpeed);
+        iHaveCharacterMovementInput.OnHorizontalMovementInput.Event = (x) => iCanMove.MoveHorizontal(x*movementSpeed);
+        iHaveCharacterMovementInput.OnDepthMovementInput.Event = (x) => iCanMove.MoveDepth(x*movementSpeed);
+        iHaveWeaponInput.AttackAction.Event = iHaveWeapon.Attack;
+        iHaveWeaponInput.AttackStoppedEvent.Event = iHaveWeapon.StopAttack;
         iDamagableThatHaveHealth.OnHealthBelowZero = OnDead;
     }
 
     protected virtual void OnDisable()
     {
-        iHaveCharacterMovementInput.OnMoveLeftInput = null;
-        iHaveCharacterMovementInput.OnMoveRightInput = null;
-        iHaveCharacterMovementInput.OnMoveBackwardInput = null;
-        iHaveCharacterMovementInput.OnMoveForwardInput = null;
+        iHaveCharacterMovementInput.OnHorizontalMovementInput.Event = null;
+        iHaveCharacterMovementInput.OnDepthMovementInput.Event = null;
+        iHaveWeaponInput.AttackAction.Event = null;
+        iHaveWeaponInput.AttackStoppedEvent.Event = null;
+        iDamagableThatHaveHealth.OnHealthBelowZero = null;
     }
 
+    protected abstract void SetCharacterMovementInput();
+    protected abstract void SetWeaponInput();
     protected abstract void OnDead();
 
 }
