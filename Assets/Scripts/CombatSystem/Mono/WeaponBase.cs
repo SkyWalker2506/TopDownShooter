@@ -13,11 +13,15 @@ public abstract class WeaponBase : MonoBehaviour
         if(readyToShot)
         {
             readyToShot = false;
-            Invoke(nameof(SetReadyToShot), fireInterval);
             if (AttackInputType == AttackInputType.Hold)
+            {
                 InvokeRepeating(nameof(Shot), 0,fireInterval);
+            }
             else
+            {
+                Invoke(nameof(SetReadyToShot), fireInterval);
                 Shot();
+            }
         }
 
     }
@@ -25,6 +29,7 @@ public abstract class WeaponBase : MonoBehaviour
     public virtual void StopAttack()
     {
         CancelInvoke(nameof(Shot));
+        Invoke(nameof(SetReadyToShot), fireInterval);
     }
 
 

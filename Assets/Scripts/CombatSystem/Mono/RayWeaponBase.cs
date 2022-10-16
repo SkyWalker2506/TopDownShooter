@@ -3,7 +3,7 @@
 public class RayWeaponBase : WeaponBase
 {
     [SerializeField] ParticleSystem shotParticle;
-    float weaponDamage=10;
+    [SerializeField] float weaponDamage=10;
     protected override void Shot()
     {
         shotParticle.Emit(5);

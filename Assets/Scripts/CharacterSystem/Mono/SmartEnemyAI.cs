@@ -5,6 +5,8 @@ public class SmartEnemyAI : EnemyAI
     Transform player;
     Vector3 distanceVector => player.position - transform.position;
     float attackDistance=5;
+    bool isAttacked;
+
     private void Awake()
     {
         player = FindObjectOfType<PlayerController>().transform;    
@@ -12,16 +14,25 @@ public class SmartEnemyAI : EnemyAI
 
     private void Update()
     {
+        if (!player) return;
+        if (!player.gameObject.activeSelf) return;
         if (!IsCloseEnoughToAttack())
+        {
+            if(isAttacked)
+            {
+                AttackStoppedEvent.CallEvent();
+            }
             MoveTowardsPlayer();
+        }
         else
+        {
             Attack();
+        }
 
     }
 
     void MoveTowardsPlayer()
     {
-        if (!player) return;
         var direction = distanceVector.normalized;
             OnHorizontalMovementInput?.CallEvent(direction.x);
         OnDepthMovementInput?.CallEvent(direction.z);
@@ -36,5 +47,6 @@ public class SmartEnemyAI : EnemyAI
     {
         transform.LookAt(transform.position+distanceVector);
         AttackAction.CallEvent();
+        isAttacked = true;
     }
 }

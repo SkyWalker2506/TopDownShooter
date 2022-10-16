@@ -64,6 +64,10 @@ PrefabInstance:
       value: 1.373
       objectReference: {fileID: 0}
     - target: {fileID: 8790113010274150890, guid: 0509ea4d66398204c8269af3d3de1c64, type: 3}
+      propertyPath: weaponDamage
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8790113010274150890, guid: 0509ea4d66398204c8269af3d3de1c64, type: 3}
       propertyPath: AttackInputType
       value: 1
       objectReference: {fileID: 0}
