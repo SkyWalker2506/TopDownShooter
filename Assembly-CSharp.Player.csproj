@@ -93,6 +93,7 @@
     <Compile Include="Assets\Scripts\CombatSystem\NonMono\IDamagableThatHaveHealth.cs" />
     <Compile Include="Assets\Scripts\CharacterSystem\Mono\EnemyAI.cs" />
     <Compile Include="Assets\Scripts\CharacterSystem\Mono\RandomMovingEnemyAI.cs" />
+    <Compile Include="Assets\Scripts\CharacterSystem\Mono\SmartEnemyAI.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\TextMesh Pro\Shaders\TMPro.cginc" />
