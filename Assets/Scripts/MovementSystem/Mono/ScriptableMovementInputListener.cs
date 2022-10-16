@@ -1,6 +1,8 @@
 ﻿using UnityEngine;
-
-public class ScriptableMovementInputListener : MonoBehaviour
+namespace MovementSystem
 {
-    [SerializeField] protected ScriptableMovementInput scriptableMovementInput;
+    public class ScriptableMovementInputListener : MonoBehaviour
+    {
+        [SerializeField] protected ScriptableMovementInput scriptableMovementInput;
+    }
 }

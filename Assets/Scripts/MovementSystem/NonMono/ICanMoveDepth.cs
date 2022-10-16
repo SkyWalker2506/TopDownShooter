@@ -1,6 +1,7 @@
-﻿
-
-public interface ICanMoveDepth 
+﻿namespace MovementSystem
 {
-    void MoveDepth(float value);
+    public interface ICanMoveDepth 
+    {
+        void MoveDepth(float value);
+    }
 }

@@ -1,30 +1,33 @@
 ﻿using System;
 using UnityEngine;
 
-public class CharacterHealth : MonoBehaviour, IDamagableThatHaveHealth
+namespace CombatSystem
 {
-    [SerializeField]float maxHealth=100;
-    float currentHealth;
-    public float MaxHealth => maxHealth;
-    public float CurrentHealth => currentHealth;
-    public float HealthRatio => currentHealth/maxHealth;
-    public Action OnHealthUpdated { get; set; }
-    public Action OnHealthBelowZero { get; set; }
-
-    private void Awake()
+    public class CharacterHealth : MonoBehaviour, IDamagableThatHaveHealth
     {
-        currentHealth = maxHealth;
-        OnHealthUpdated?.Invoke();
-    }
+        [SerializeField]float maxHealth=100;
+        float currentHealth;
+        public float MaxHealth => maxHealth;
+        public float CurrentHealth => currentHealth;
+        public float HealthRatio => currentHealth/maxHealth;
+        public Action OnHealthUpdated { get; set; }
+        public Action OnHealthBelowZero { get; set; }
 
-    public void OnDamaged(float value)
-    {
-        currentHealth -= value;
-        if(currentHealth<=0)
+        private void Awake()
         {
-            currentHealth = 0;
-            OnHealthBelowZero?.Invoke();
+            currentHealth = maxHealth;
+            OnHealthUpdated?.Invoke();
         }
-        OnHealthUpdated?.Invoke();
+
+        public void OnDamaged(float value)
+        {
+            currentHealth -= value;
+            if(currentHealth<=0)
+            {
+                currentHealth = 0;
+                OnHealthBelowZero?.Invoke();
+            }
+            OnHealthUpdated?.Invoke();
+        }
     }
 }

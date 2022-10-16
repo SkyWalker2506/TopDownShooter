@@ -1,19 +1,21 @@
 ﻿using UnityEngine;
 
-public class RayWeaponBase : WeaponBase
+namespace CombatSystem
 {
-    [SerializeField] ParticleSystem shotParticle;
-    [SerializeField] float weaponDamage=10;
-    protected override void Shot()
+    public class RayWeaponBase : WeaponBase
     {
-        shotParticle.Emit(5);
-        RaycastHit hit;
-        if (Physics.SphereCast(weaponTip.position,1, weaponTip.TransformDirection(Vector3.forward), out hit))
+        [SerializeField] ParticleSystem shotParticle;
+        [SerializeField] float weaponDamage=10;
+        protected override void Shot()
         {
-            Debug.Log(hit.transform.name);
-            if (hit.collider.TryGetComponent(out IDamagable damagable))
-                damagable.OnDamaged(weaponDamage);
+            shotParticle.Emit(1);
+            RaycastHit hit;
+            if (Physics.SphereCast(weaponTip.position,1, weaponTip.TransformDirection(Vector3.forward), out hit))
+            {
+                if (hit.collider.TryGetComponent(out IDamagable damagable))
+                    damagable.OnDamaged(weaponDamage);
+            }
         }
-    }
 
+    }
 }

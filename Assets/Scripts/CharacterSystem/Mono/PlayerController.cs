@@ -1,40 +1,44 @@
-﻿using System;
+﻿using CombatSystem;
+using MovementSystem;
 using UnityEngine;
-using UnityEngine.EventSystems;
-using UnityEngine.UI;
 
-public class PlayerController : CharacterController
+
+namespace CharacterSystem
 {
-    [SerializeField] ScriptableMovementInput scriptableMovementInput;
-    [SerializeField] ScriptableWeaponEvent scriptableWeaponEvent;
-    IHaveMultipleWeapon iHaveMultipleWeapon => (WeaponController)iHaveWeapon;
-
-    protected override void OnEnable()
+    public class PlayerController : CharacterController
     {
-        base.OnEnable();
-        iHaveWeaponInput.SwapEvent.Event = iHaveMultipleWeapon.Swap;
+        [SerializeField] ScriptableMovementInput scriptableMovementInput;
+        [SerializeField] ScriptableWeaponEvent scriptableWeaponEvent;
+        IHaveMultipleWeapon iHaveMultipleWeapon => (WeaponController)iHaveWeapon;
 
-    }
+        protected override void OnEnable()
+        {
+            base.OnEnable();
+            iHaveWeaponInput.SwapEvent.Event = iHaveMultipleWeapon.Swap;
 
-    protected override void OnDisable()
-    {
-        base.OnDisable();
-        iHaveWeaponInput.SwapEvent.Event = null;
-    }
+        }
 
-    protected override void SetCharacterMovementInput()
-    {
-        iHaveCharacterMovementInput = scriptableMovementInput;
-    }
+        protected override void OnDisable()
+        {
+            base.OnDisable();
+            iHaveWeaponInput.SwapEvent.Event = null;
+        }
 
-    protected override void SetWeaponInput()
-    {
-        iHaveWeaponInput = scriptableWeaponEvent;
-    }
+        protected override void SetCharacterMovementInput()
+        {
+            iHaveCharacterMovementInput = scriptableMovementInput;
+        }
 
-    protected override void OnDead()
-    {
-        Debug.Log("Player Dead");
-        gameObject.SetActive(false);
+        protected override void SetWeaponInput()
+        {
+            iHaveWeaponInput = scriptableWeaponEvent;
+        }
+
+        protected override void OnDead()
+        {
+            Debug.Log("Player Dead");
+            gameObject.SetActive(false);
+            SceneManager.Instance.LoadScene(0);
+        }
     }
 }

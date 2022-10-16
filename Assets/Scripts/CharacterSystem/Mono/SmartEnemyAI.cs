@@ -1,52 +1,55 @@
 ﻿using UnityEngine;
 
-public class SmartEnemyAI : EnemyAI
+namespace CharacterSystem
 {
-    Transform player;
-    Vector3 distanceVector => player.position - transform.position;
-    float attackDistance=5;
-    bool isAttacked;
-
-    private void Awake()
+    public class SmartEnemyAI : EnemyAI
     {
-        player = FindObjectOfType<PlayerController>().transform;    
-    }
+        Transform player;
+        Vector3 distanceVector => player.position - transform.position;
+        float attackDistance=5;
+        bool isAttacked;
 
-    private void Update()
-    {
-        if (!player) return;
-        if (!player.gameObject.activeSelf) return;
-        if (!IsCloseEnoughToAttack())
+        private void Awake()
         {
-            if(isAttacked)
+            player = FindObjectOfType<PlayerController>().transform;    
+        }
+
+        private void Update()
+        {
+            if (!player) return;
+            if (!player.gameObject.activeSelf) return;
+            if (!IsCloseEnoughToAttack())
             {
-                AttackStoppedEvent.CallEvent();
+                if(isAttacked)
+                {
+                    AttackStoppedEvent.CallEvent();
+                }
+                MoveTowardsPlayer();
             }
-            MoveTowardsPlayer();
+            else
+            {
+                Attack();
+            }
+
         }
-        else
+
+        void MoveTowardsPlayer()
         {
-            Attack();
+            var direction = distanceVector.normalized;
+                OnHorizontalMovementInput?.CallEvent(direction.x);
+            OnDepthMovementInput?.CallEvent(direction.z);
         }
 
-    }
+        bool IsCloseEnoughToAttack()
+        {
+            return distanceVector.magnitude <= attackDistance;
+        }
 
-    void MoveTowardsPlayer()
-    {
-        var direction = distanceVector.normalized;
-            OnHorizontalMovementInput?.CallEvent(direction.x);
-        OnDepthMovementInput?.CallEvent(direction.z);
-    }
-
-    bool IsCloseEnoughToAttack()
-    {
-        return distanceVector.magnitude <= attackDistance;
-    }
-
-    void Attack()
-    {
-        transform.LookAt(transform.position+distanceVector);
-        AttackAction.CallEvent();
-        isAttacked = true;
+        void Attack()
+        {
+            transform.LookAt(transform.position+distanceVector);
+            AttackAction.CallEvent();
+            isAttacked = true;
+        }
     }
 }

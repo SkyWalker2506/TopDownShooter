@@ -75,5 +75,6 @@ PrefabInstance:
       propertyPath: fireInterval
       value: 0.5
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 2756189521022164550, guid: 0509ea4d66398204c8269af3d3de1c64, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 0509ea4d66398204c8269af3d3de1c64, type: 3}

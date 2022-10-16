@@ -1,14 +1,16 @@
 using System;
 using UnityEngine;
-
-[CreateAssetMenu(menuName = "ScriptableEvent")]
-public class ScriptableEvent : ScriptableObject,IEvent
+namespace EventSystem
 {
-    public Action Event { get; set; }
-   
-    public void CallEvent()
+    [CreateAssetMenu(menuName = "ScriptableEvent")]
+    public class ScriptableEvent : ScriptableObject,IEvent
     {
-        Event?.Invoke();
-    }
+        public Action Event { get; set; }
+   
+        public void CallEvent()
+        {
+            Event?.Invoke();
+        }
 
+    }
 }

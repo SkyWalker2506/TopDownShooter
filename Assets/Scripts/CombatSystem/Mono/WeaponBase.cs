@@ -1,43 +1,45 @@
 using UnityEngine;
-using UnityEngine.EventSystems;
 
+namespace CombatSystem
+{
 public abstract class WeaponBase : MonoBehaviour
 {
-    [SerializeField] protected Transform weaponTip;
-    [SerializeField] protected float fireInterval =.1f;
-    public AttackInputType AttackInputType;
-    bool readyToShot=true;
+        [SerializeField] protected Transform weaponTip;
+        [SerializeField] protected float fireInterval =.1f;
+        public AttackInputType AttackInputType;
+        bool readyToShot=true;
 
-    public virtual void Attack()
-    {
-        if(readyToShot)
+        public virtual void Attack()
         {
-            readyToShot = false;
-            if (AttackInputType == AttackInputType.Hold)
+            if(readyToShot)
             {
-                InvokeRepeating(nameof(Shot), 0,fireInterval);
+                readyToShot = false;
+                if (AttackInputType == AttackInputType.Hold)
+                {
+                    InvokeRepeating(nameof(Shot), 0,fireInterval);
+                }
+                else
+                {
+                    Invoke(nameof(SetReadyToShot), fireInterval);
+                    Shot();
+                }
             }
-            else
-            {
-                Invoke(nameof(SetReadyToShot), fireInterval);
-                Shot();
-            }
+
+        }
+
+        public virtual void StopAttack()
+        {
+            CancelInvoke(nameof(Shot));
+            Invoke(nameof(SetReadyToShot), fireInterval);
+        }
+
+
+        protected abstract void Shot();
+    
+        void SetReadyToShot()
+        {
+            readyToShot = true;
         }
 
     }
-
-    public virtual void StopAttack()
-    {
-        CancelInvoke(nameof(Shot));
-        Invoke(nameof(SetReadyToShot), fireInterval);
-    }
-
-
-    protected abstract void Shot();
-    
-    void SetReadyToShot()
-    {
-        readyToShot = true;
-    }
-
 }

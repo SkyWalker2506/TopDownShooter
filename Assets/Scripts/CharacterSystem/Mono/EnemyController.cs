@@ -1,29 +1,31 @@
 ﻿using UnityEngine;
-
-public class EnemyController : CharacterController
+namespace CharacterSystem
 {
-    IEnemyAI enemyAI;
-
-    protected override void Awake()
+    public class EnemyController : CharacterController
     {
-        enemyAI = GetComponent<IEnemyAI>();
-        base.Awake();
+        IEnemyAI enemyAI;
+
+        protected override void Awake()
+        {
+            enemyAI = GetComponent<IEnemyAI>();
+            base.Awake();
+        }
+
+        protected override void OnDead()
+        {
+            Debug.Log("Player Dead");
+            gameObject.SetActive(false);
+        }
+
+        protected override void SetCharacterMovementInput()
+        {
+            iHaveCharacterMovementInput = enemyAI;
+        }
+
+        protected override void SetWeaponInput()
+        {
+            iHaveWeaponInput = enemyAI;
+        }
     }
 
-    protected override void OnDead()
-    {
-        Debug.Log("Player Dead");
-        gameObject.SetActive(false);
-    }
-
-    protected override void SetCharacterMovementInput()
-    {
-        iHaveCharacterMovementInput = enemyAI;
-    }
-
-    protected override void SetWeaponInput()
-    {
-        iHaveWeaponInput = enemyAI;
-    }
 }
-

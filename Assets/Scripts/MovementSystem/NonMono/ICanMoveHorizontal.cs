@@ -1,4 +1,7 @@
-﻿public interface ICanMoveHorizontal
+﻿namespace MovementSystem
 {
-    void MoveHorizontal(float value);
+    public interface ICanMoveHorizontal
+    {
+        void MoveHorizontal(float value);
+    }
 }
