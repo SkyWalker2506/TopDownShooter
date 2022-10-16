@@ -7,10 +7,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 6524331835138287171, guid: 9f0ee572b60a8bf49beadc162b118c27, type: 3}
-      propertyPath: m_Materials.Array.data[0]
-      value: 
-      objectReference: {fileID: 10303, guid: 0000000000000000f000000000000000, type: 0}
     - target: {fileID: 6524331835138287172, guid: 9f0ee572b60a8bf49beadc162b118c27, type: 3}
       propertyPath: m_Name
       value: EnemyBase
@@ -66,7 +62,7 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 6524331835138287172, guid: 9f0ee572b60a8bf49beadc162b118c27, type: 3}
   m_PrefabInstance: {fileID: 1277146354734967796}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &8667341551892157856
+--- !u!114 &39503322716088454
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -78,8 +74,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 515ffa6ff0737e948809ef8e5042bc3b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  movementSpeed: 50
-  scriptableMovementInput: {fileID: 0}
-  shotAction: {fileID: 0}
-  shotStoppedAction: {fileID: 0}
-  swapAction: {fileID: 0}
+  movementSpeed: 5

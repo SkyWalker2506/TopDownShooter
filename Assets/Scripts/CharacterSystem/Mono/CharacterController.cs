@@ -5,7 +5,7 @@ using UnityEngine;
 [RequireComponent(typeof(IHaveWeapon))]
 public abstract class CharacterController : MonoBehaviour
 {
-    [SerializeField] float movementSpeed=50;
+    [SerializeField] float movementSpeed=5;
     protected IHaveCharacterMovementInput iHaveCharacterMovementInput;
     protected IHaveWeaponInput iHaveWeaponInput;
     ICanMove2D iCanMove;

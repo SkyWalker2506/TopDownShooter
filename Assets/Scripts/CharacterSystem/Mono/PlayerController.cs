@@ -9,7 +9,6 @@ public class PlayerController : CharacterController
     [SerializeField] ScriptableWeaponEvent scriptableWeaponEvent;
     IHaveMultipleWeapon iHaveMultipleWeapon => (WeaponController)iHaveWeapon;
 
-
     protected override void OnEnable()
     {
         base.OnEnable();
@@ -21,13 +20,6 @@ public class PlayerController : CharacterController
     {
         base.OnDisable();
         iHaveWeaponInput.SwapEvent.Event = null;
-
-    }
-
-    protected override void OnDead()
-    {
-        Debug.Log("Player Dead");
-        gameObject.SetActive(false);
     }
 
     protected override void SetCharacterMovementInput()
@@ -38,5 +30,11 @@ public class PlayerController : CharacterController
     protected override void SetWeaponInput()
     {
         iHaveWeaponInput = scriptableWeaponEvent;
+    }
+
+    protected override void OnDead()
+    {
+        Debug.Log("Player Dead");
+        gameObject.SetActive(false);
     }
 }

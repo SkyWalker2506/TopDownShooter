@@ -6,7 +6,7 @@ public class EventBase : IEvent
 
     public void CallEvent()
     {
-        throw new NotImplementedException();
+        Event?.Invoke();
     }
 }
 

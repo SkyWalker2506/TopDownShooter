@@ -9,7 +9,7 @@
     <ProductVersion>10.0.20506</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
     <RootNamespace></RootNamespace>
-    <ProjectGuid>{66D274B0-5400-95B9-6924-BBCBDCEF1F16}</ProjectGuid>
+    <ProjectGuid>{C7C44AEF-F966-94CF-2510-D8ADF35A932D}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <AssemblyName>Assembly-CSharp</AssemblyName>
@@ -63,6 +63,7 @@
     <Compile Include="Assets\Scripts\CombatSystem\NonMono\IDamagable.cs" />
     <Compile Include="Assets\Scripts\MovementSystem\Scriptable\ScriptableMovementInput.cs" />
     <Compile Include="Assets\Scripts\MovementSystem\Mono\ScriptableMovementInputListener.cs" />
+    <Compile Include="Assets\Scripts\EventSystem\Interface\IHaveWeaponInput.cs" />
     <Compile Include="Assets\Scripts\CombatSystem\NonMono\IHaveMultipleWeapon.cs" />
     <Compile Include="Assets\Scripts\CombatSystem\Mono\CharacterHealth.cs" />
     <Compile Include="Assets\Scripts\CharacterSystem\Mono\CharacterController.cs" />
@@ -72,6 +73,7 @@
     <Compile Include="Assets\Scripts\EventSystem\Scriptable\EventBase.cs" />
     <Compile Include="Assets\Scripts\CombatSystem\Mono\CharacterHealthUI.cs" />
     <Compile Include="Assets\Scripts\EventSystem\Interface\IEvent.cs" />
+    <Compile Include="Assets\Scripts\EventSystem\Scriptable\ScriptableWeaponEvent.cs" />
     <Compile Include="Assets\Third Party Packages\Joystick Pack\Scripts\Joysticks\DynamicJoystick.cs" />
     <Compile Include="Assets\Scripts\CombatSystem\Mono\RayWeaponBase.cs" />
     <Compile Include="Assets\Third Party Packages\Joystick Pack\Scripts\Base\Joystick.cs" />
@@ -83,12 +85,14 @@
     <Compile Include="Assets\Scripts\CombatSystem\Mono\AttackInputType.cs" />
     <Compile Include="Assets\Scripts\MovementSystem\NonMono\ICanMoveHorizontal.cs" />
     <Compile Include="Assets\Scripts\EventSystem\Interface\IHaveCharacterMovementInput.cs" />
+    <Compile Include="Assets\Scripts\CharacterSystem\IEnemyAI.cs" />
     <Compile Include="Assets\Scripts\MovementSystem\NonMono\ICanMoveDepth.cs" />
     <Compile Include="Assets\Third Party Packages\Joystick Pack\Scripts\Joysticks\FloatingJoystick.cs" />
     <Compile Include="Assets\Scripts\CharacterSystem\Mono\EnemyController.cs" />
-    <Compile Include="Assets\Scripts\EventSystem\Interface\IEnemyAIInput.cs" />
     <Compile Include="Assets\Scripts\CharacterSystem\Mono\PlayerController.cs" />
     <Compile Include="Assets\Scripts\CombatSystem\NonMono\IDamagableThatHaveHealth.cs" />
+    <Compile Include="Assets\Scripts\CharacterSystem\Mono\EnemyAI.cs" />
+    <Compile Include="Assets\Scripts\CharacterSystem\Mono\RandomMovingEnemyAI.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\TextMesh Pro\Shaders\TMPro.cginc" />
@@ -687,39 +691,39 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="Unity.Timeline.Player.csproj">
-      <Project>{D663C553-45A7-6120-73D4-A73C364E8490}</Project>
+      <Project>{FD336F75-EF0A-B143-5C85-62C36868C1F2}</Project>
       <Name>Unity.Timeline.Player</Name>
     </ProjectReference>
     <ProjectReference Include="Unity.TextMeshPro.Player.csproj">
-      <Project>{071027CC-2EDC-B8DB-DC80-69EF3251578F}</Project>
+      <Project>{F29B5F8A-D21A-D6A7-5754-B7F4946276D7}</Project>
       <Name>Unity.TextMeshPro.Player</Name>
     </ProjectReference>
     <ProjectReference Include="Unity.VisualScripting.Flow.Player.csproj">
-      <Project>{C99C44B2-94CC-E985-2EA0-3C34265D71F6}</Project>
+      <Project>{7ADCE761-0826-7096-7D74-D9C5B07D9BE8}</Project>
       <Name>Unity.VisualScripting.Flow.Player</Name>
     </ProjectReference>
     <ProjectReference Include="UnityEngine.UI.Player.csproj">
-      <Project>{07BBD253-083E-0A96-D3C5-5905078FC6A5}</Project>
+      <Project>{2A85F8B0-0E5E-D1F3-FA94-FDC0C50CC7A0}</Project>
       <Name>UnityEngine.UI.Player</Name>
     </ProjectReference>
     <ProjectReference Include="Unity.Services.Core.Player.csproj">
-      <Project>{D59A16AF-F649-049E-B6E0-C586A9BC7231}</Project>
+      <Project>{442B64B4-9681-B16C-637A-F4EFBF08AFC5}</Project>
       <Name>Unity.Services.Core.Player</Name>
     </ProjectReference>
     <ProjectReference Include="Unity.VisualScripting.Core.Player.csproj">
-      <Project>{5A208529-89F7-E67D-98BE-671A86DA095E}</Project>
+      <Project>{79BA891D-2EC7-D297-E8F0-4F0E9788087A}</Project>
       <Name>Unity.VisualScripting.Core.Player</Name>
     </ProjectReference>
     <ProjectReference Include="Unity.Services.Core.Analytics.Player.csproj">
-      <Project>{8A8F7500-EDEA-CF5C-9D78-A248C3B4B838}</Project>
+      <Project>{CAF2EC6D-4C43-C375-F14D-C5EF9470E563}</Project>
       <Name>Unity.Services.Core.Analytics.Player</Name>
     </ProjectReference>
     <ProjectReference Include="Unity.Services.Core.Environments.Player.csproj">
-      <Project>{A7BF482A-2B8A-ED6E-5DB4-8C1780FC08E9}</Project>
+      <Project>{BF4BC753-769A-9F84-0E64-63E15102D693}</Project>
       <Name>Unity.Services.Core.Environments.Player</Name>
     </ProjectReference>
     <ProjectReference Include="Unity.VisualScripting.State.Player.csproj">
-      <Project>{96175391-EE91-69E3-D5CF-0DB4AAB318D1}</Project>
+      <Project>{CD5EDD66-C440-F384-837E-BC152EA4E8AE}</Project>
       <Name>Unity.VisualScripting.State.Player</Name>
     </ProjectReference>
   </ItemGroup>
